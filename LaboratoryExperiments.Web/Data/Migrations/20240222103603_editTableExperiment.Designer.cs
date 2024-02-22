@@ -4,6 +4,7 @@ using LaboratoryExperiments.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaboratoryExperiments.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240222103603_editTableExperiment")]
+    partial class editTableExperiment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,42 +117,6 @@ namespace LaboratoryExperiments.Web.Data.Migrations
                     b.ToTable("ProcessingSystems");
                 });
 
-            modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.ProcessingType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL");
-
-                    b.ToTable("ProcessingTypes");
-                });
-
-            modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.SanitaryDrain", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SanitaryDrain");
-                });
-
             modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.Station", b =>
                 {
                     b.Property<int>("Id")
@@ -173,10 +140,7 @@ namespace LaboratoryExperiments.Web.Data.Migrations
                     b.Property<int>("ProcessingSystemId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProcessingTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SanitaryDrainId")
+                    b.Property<int>("ProcessingType")
                         .HasColumnType("int");
 
                     b.Property<int>("StationStatusId")
@@ -191,10 +155,6 @@ namespace LaboratoryExperiments.Web.Data.Migrations
                         .HasFilter("[Name] IS NOT NULL");
 
                     b.HasIndex("ProcessingSystemId");
-
-                    b.HasIndex("ProcessingTypeId");
-
-                    b.HasIndex("SanitaryDrainId");
 
                     b.HasIndex("StationStatusId");
 
@@ -504,18 +464,6 @@ namespace LaboratoryExperiments.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LaboratoryExperiments.Web.Data.DomainModels.ProcessingType", "ProcessingType")
-                        .WithMany()
-                        .HasForeignKey("ProcessingTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LaboratoryExperiments.Web.Data.DomainModels.SanitaryDrain", "SanitaryDrain")
-                        .WithMany("Stations")
-                        .HasForeignKey("SanitaryDrainId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("LaboratoryExperiments.Web.Data.DomainModels.StationStatus", "StationStatus")
                         .WithMany()
                         .HasForeignKey("StationStatusId")
@@ -525,10 +473,6 @@ namespace LaboratoryExperiments.Web.Data.Migrations
                     b.Navigation("Branch");
 
                     b.Navigation("ProcessingSystem");
-
-                    b.Navigation("ProcessingType");
-
-                    b.Navigation("SanitaryDrain");
 
                     b.Navigation("StationStatus");
                 });
@@ -604,11 +548,6 @@ namespace LaboratoryExperiments.Web.Data.Migrations
                 });
 
             modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.Branch", b =>
-                {
-                    b.Navigation("Stations");
-                });
-
-            modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.SanitaryDrain", b =>
                 {
                     b.Navigation("Stations");
                 });

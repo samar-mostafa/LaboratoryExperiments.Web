@@ -4,6 +4,7 @@ using LaboratoryExperiments.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaboratoryExperiments.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240222085359_editTablesAndAddIndexes")]
+    partial class editTablesAndAddIndexes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,9 +56,6 @@ namespace LaboratoryExperiments.Web.Data.Migrations
                     b.Property<float>("EffleuntValue")
                         .HasColumnType("real");
 
-                    b.Property<int>("ExperimentTypeId")
-                        .HasColumnType("int");
-
                     b.Property<float>("InffleuntValue")
                         .HasColumnType("real");
 
@@ -67,8 +67,6 @@ namespace LaboratoryExperiments.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExperimentTypeId");
-
                     b.HasIndex("Name")
                         .IsUnique()
                         .HasFilter("[Name] IS NOT NULL");
@@ -76,22 +74,6 @@ namespace LaboratoryExperiments.Web.Data.Migrations
                     b.HasIndex("UnitId");
 
                     b.ToTable("Experiments");
-                });
-
-            modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.ExperimentType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExperimentTypes");
                 });
 
             modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.ProcessingSystem", b =>
@@ -112,42 +94,6 @@ namespace LaboratoryExperiments.Web.Data.Migrations
                         .HasFilter("[Name] IS NOT NULL");
 
                     b.ToTable("ProcessingSystems");
-                });
-
-            modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.ProcessingType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL");
-
-                    b.ToTable("ProcessingTypes");
-                });
-
-            modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.SanitaryDrain", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SanitaryDrain");
                 });
 
             modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.Station", b =>
@@ -173,14 +119,11 @@ namespace LaboratoryExperiments.Web.Data.Migrations
                     b.Property<int>("ProcessingSystemId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProcessingTypeId")
+                    b.Property<int>("ProcessingType")
                         .HasColumnType("int");
 
-                    b.Property<int>("SanitaryDrainId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StationStatusId")
-                        .HasColumnType("int");
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -192,29 +135,7 @@ namespace LaboratoryExperiments.Web.Data.Migrations
 
                     b.HasIndex("ProcessingSystemId");
 
-                    b.HasIndex("ProcessingTypeId");
-
-                    b.HasIndex("SanitaryDrainId");
-
-                    b.HasIndex("StationStatusId");
-
                     b.ToTable("Stations");
-                });
-
-            modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.StationStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("StationStatuses");
                 });
 
             modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.Test", b =>
@@ -473,19 +394,11 @@ namespace LaboratoryExperiments.Web.Data.Migrations
 
             modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.Experiment", b =>
                 {
-                    b.HasOne("LaboratoryExperiments.Web.Data.DomainModels.ExperimentType", "ExperimentType")
-                        .WithMany()
-                        .HasForeignKey("ExperimentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("LaboratoryExperiments.Web.Data.DomainModels.Unit", "Unit")
                         .WithMany()
                         .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ExperimentType");
 
                     b.Navigation("Unit");
                 });
@@ -504,33 +417,9 @@ namespace LaboratoryExperiments.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LaboratoryExperiments.Web.Data.DomainModels.ProcessingType", "ProcessingType")
-                        .WithMany()
-                        .HasForeignKey("ProcessingTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LaboratoryExperiments.Web.Data.DomainModels.SanitaryDrain", "SanitaryDrain")
-                        .WithMany("Stations")
-                        .HasForeignKey("SanitaryDrainId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LaboratoryExperiments.Web.Data.DomainModels.StationStatus", "StationStatus")
-                        .WithMany()
-                        .HasForeignKey("StationStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Branch");
 
                     b.Navigation("ProcessingSystem");
-
-                    b.Navigation("ProcessingType");
-
-                    b.Navigation("SanitaryDrain");
-
-                    b.Navigation("StationStatus");
                 });
 
             modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.Test", b =>
@@ -604,11 +493,6 @@ namespace LaboratoryExperiments.Web.Data.Migrations
                 });
 
             modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.Branch", b =>
-                {
-                    b.Navigation("Stations");
-                });
-
-            modelBuilder.Entity("LaboratoryExperiments.Web.Data.DomainModels.SanitaryDrain", b =>
                 {
                     b.Navigation("Stations");
                 });
