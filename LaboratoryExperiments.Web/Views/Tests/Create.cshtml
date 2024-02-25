@@ -1,0 +1,89 @@
+﻿@model CreateTestViewModel
+
+@section Styles {
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+
+<div class="container-fluid px-4 mt-4">
+    <div class="d-flex justify-content-center">
+        <h1 class="mt-4">Add New Test</h1>
+        
+    </div>
+<form asp-action="Create" class="m-5 p-5"
+          data-ajax-method="post"
+          data-ajax="true" 
+          data-ajax-success="showExperimentMessage"
+          data-ajax-failure="showErrorMessage"
+          data-ajax-complete="onModelComplete">
+
+    <div class="row">
+            <div class="form-group col-md-6 pb-3">
+                <label asp-for="ExperimentId"></label>
+                <select id="ExperimentId" asp-items="@ViewBag.Experiments" class="form-select js-select2 " asp-for="ExperimentId">
+                    <option selected value="">Choose..</option>
+                </select>
+                <span asp-validation-for="ExperimentId" class="text-danger d-block"></span>
+            </div>
+        <div class="form-group col-md-6 pb-3">
+                <label asp-for="StationId"></label>
+                <select id="StationId" asp-items="@ViewBag.Stations" class="form-select js-select2 " asp-for="StationId">
+                <option selected value="">Choose..</option>
+            </select>
+            <span asp-validation-for="StationId" class="text-danger d-block"></span>
+        </div>
+           
+            @Html.RadioButtonFor(m => m.In_Eff, false)<span>Inffleunt</span>
+      
+         <div class="col-md-12 row justify-content-center">
+                <div class=" form-check col-md-2 py-3">
+            @Html.RadioButtonFor(m => m.In_Eff, false)<span>Inffleunt</span>
+                </div>
+                <div class="form-check col-md-2 py-3">
+            @Html.RadioButtonFor(m => m.In_Eff, true)<span>Effleunt</span>
+                </div>
+         </div> 
+           
+        <div class="form-group col-md-6 pb-3">
+                <label asp-for="EnteredValue"></label>
+            <input type="number" class="form-control" placeholder="" asp-for="EnteredValue" />           
+            <span asp-validation-for="EnteredValue" class="text-danger d-block"></span>
+        </div>
+            <div class="form-group col-md-6 pb-3">
+                <label asp-for="Date"></label>
+                <input type="date" class="form-control" placeholder="" asp-for="Date" />
+                <span asp-validation-for="Date" class="text-danger d-block"></span>
+            </div>
+       
+    </div>
+
+       <div class="col-md-2 m-auto">
+            <a asp-action="Index" asp-controller="Tests" class="btn btn-light">Back to list</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          
+       </div>
+
+</form>
+</div>
+
+            @section Plugins {
+
+    <script src="~/lib/select2/js/select2.min.js"></script>
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+}
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function onModelComplete() {
+            $("form").trigger('reset');
+
+            $('#ExperimentId').prop('selectedIndex', 0).change();
+            $('#StationId').prop('selectedIndex', 0).change();
+            
+        }
+
+        function showExperimentMessage(res) {
+            Swal.fire(res);
+        }
+    </script>
+}

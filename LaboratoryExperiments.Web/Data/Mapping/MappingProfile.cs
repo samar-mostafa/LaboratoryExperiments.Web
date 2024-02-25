@@ -23,6 +23,17 @@ namespace LaboratoryExperiments.Web.Data.Mapping
                 .ForMember(des => des.ExperimentType, op => op.MapFrom(src => src.ExperimentType.Name));
 
             CreateMap<CreateExperimentViewModel, Experiment>();
+
+            //test
+            CreateMap<CreateTestViewModel, Test>();
+            CreateMap<Test, TestViewModel>().ForMember(des => des.Station, op => op.MapFrom(src => src.Station.Name))
+               .ForMember(des => des.Branch, op => op.MapFrom(src => src.Station.Branch.Name))
+               .ForMember(des => des.Experiment, op => op.MapFrom(src => src.Experiment.Name))
+               .ForMember(des => des.SanitaryDrain, op => op.MapFrom(src => src.Station.SanitaryDrain.Name))
+               .ForMember(des => des.ExperimentType, op => op.MapFrom(src => src.Experiment.ExperimentType.Name))
+                .ForMember(des => des.InffleuntValue, op => op.MapFrom(src => src.Experiment.InffleuntValue))
+                 .ForMember(des => des.EffleuntValue, op => op.MapFrom(src => src.Experiment.EffleuntValue));
+
         }
     }
 }
