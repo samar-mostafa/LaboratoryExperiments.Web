@@ -4,7 +4,7 @@
 <form asp-action="Create"
       data-ajax-method="post"
       data-ajax="true"
-      data-ajax-success="onModelSuccess"
+      data-ajax-complete="onGeneralModelComplete"
       data-ajax-failure="showErrorMessage" >
      
     @if (Model?.Id > 0)

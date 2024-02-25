@@ -3,9 +3,9 @@
 
 <form asp-action="Create"
       data-ajax-method="post"
-      data-ajax="true"
-      data-ajax-success="onModelSuccess"
-      data-ajax-failure="showErrorMessage" >
+      data-ajax="true"    
+      data-ajax-failure="showErrorMessage"
+      data-ajax-complete="onGeneralModelComplete">
      
     @if (Model?.Id > 0)
     {
@@ -22,3 +22,4 @@
     <partial name="_ModelFooter" />
 
 </form>
+

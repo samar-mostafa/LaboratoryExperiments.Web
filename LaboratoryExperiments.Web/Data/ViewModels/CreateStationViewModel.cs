@@ -1,10 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace LaboratoryExperiments.Web.Data.ViewModels
 {
     public class CreateStationViewModel
     {
         public int Id { get; set; }
+        [Required]
+        [MinLength(2, ErrorMessage = "you must enter more than 1 character!")]
+        [Remote("AllowItem", null, ErrorMessage = "this name is allready exist!")]
         public string Name { get; set; }
         [Display(Name = "Number Of Stages")]
         public int NumberOfStages { get; set; }

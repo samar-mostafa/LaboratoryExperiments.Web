@@ -1,0 +1,83 @@
+﻿@model CreateExperimentViewModel
+
+@section Styles {
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+
+<div class="container-fluid px-4 mt-4">
+    <div class="d-flex justify-content-center">
+        <h1 class="mt-4">Add New Experiment</h1>
+        
+    </div>
+<form asp-action="Create" class="m-5 p-5"
+          data-ajax-method="post"
+          data-ajax="true" 
+          data-ajax-success="showSuccessMessage"
+          data-ajax-failure="showErrorMessage"
+          data-ajax-complete="onModelComplete">
+
+    <div class="row">
+            <div class="form-group col-md-12 pb-3">
+                <label asp-for="Name"></label>
+                <input type="text" class="form-control" placeholder="" asp-for="Name" />
+
+                <span asp-validation-for="Name" class="text-danger d-block"></span>
+            </div>
+        <div class="form-group col-md-6 pb-3">
+
+                <label asp-for="UnitId"></label>
+                <select id="UnitId" asp-items="@ViewBag.Units" class="form-select js-select2 " asp-for="UnitId">
+                <option selected value="">Choose..</option>
+            </select>
+            <span asp-validation-for="UnitId" class="text-danger d-block"></span>
+        </div>
+            <div class="form-group col-md-6 pb-3">
+                <label asp-for="ExperimentTypeId"></label>
+                <select id="ExperimentTypeId" asp-items="@ViewBag.ExperimentTypes" class="form-select js-select2 " asp-for="ExperimentTypeId">
+                    <option selected value="">Choose..</option>
+                </select>
+                <span asp-validation-for="ExperimentTypeId" class="text-danger d-block"></span>
+            </div>
+
+            <div class="form-group col-md-6 pb-3">
+                <label asp-for="InffleuntValue"></label>
+                <input type="text" class="form-control" placeholder="" asp-for="InffleuntValue" />
+
+                <span asp-validation-for="InffleuntValue" class="text-danger d-block"></span>
+            </div>
+            <div class="form-group col-md-6 pb-3">
+                <label asp-for="EffleuntValue"></label>
+                <input type="text" class="form-control" placeholder="" asp-for="EffleuntValue" />
+
+                <span asp-validation-for="EffleuntValue" class="text-danger d-block"></span>
+            </div>
+      
+        
+
+       <div class="col-md-2 m-auto">
+            <a asp-action="Index" asp-controller="Experiments" class="btn btn-light">Back to list</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          
+       </div>
+       </div>
+
+</form>
+</div>
+
+            @section Plugins {
+
+    <script src="~/lib/select2/js/select2.min.js"></script>
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+}
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function onModelComplete() {
+            $("form").trigger('reset');
+
+            $('#UnitId').prop('selectedIndex', 0).change();
+            $('#ExperimentTypeId').prop('selectedIndex', 0).change();          
+        }
+    </script>
+}

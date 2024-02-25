@@ -11,9 +11,18 @@ function showSuccessMessage(message = 'Saved successfully') {
     });
 }
 
-function showErrorMessage(message = 'something went wrong') {
+function onGeneralModelComplete() {
+    showSuccessMessage()
+    setInterval(function () {
+        window.$('#Model').modal('hide');
+        window.location.reload();
+    }, 2000);
+
+}
+function showErrorMessage() {
+
     Swal.fire({
-        text: message.responseText !== undefined ? message.responseText : message,
+        text: 'something went wrong',
         icon: "error",
         buttonsStyling: false,
         confirmButtonText: "Ok, got it!",
@@ -23,6 +32,12 @@ function showErrorMessage(message = 'something went wrong') {
     });
 }
 $(document).ready(function () {
+    if ($('.js-select2').length > 0) {
+        $('.js-select2').select2({
+            allowClear: true,
+            /* matcher: matchCustom*/
+        });
+    }
     $('body').delegate('.js-Delete', 'click', function () {
         var btn = $(this);
 

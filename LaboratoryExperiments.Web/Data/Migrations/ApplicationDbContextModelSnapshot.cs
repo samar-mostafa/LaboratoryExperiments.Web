@@ -225,6 +225,9 @@ namespace LaboratoryExperiments.Web.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<float>("EnteredValue")
                         .HasColumnType("real");
 

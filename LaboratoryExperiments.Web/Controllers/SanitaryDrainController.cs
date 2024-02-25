@@ -47,15 +47,15 @@ namespace LaboratoryExperiments.Web.Controllers
 
         public IActionResult AllowItem(CreateBranchViewModel model)
         {
-            var branch = db.SanitaryDrain.SingleOrDefault(c => c.Name == model.Name);
-            var isAllowed = branch is null || branch.Id.Equals(model.Id);
+            var san = db.SanitaryDrain.SingleOrDefault(c => c.Name == model.Name);
+            var isAllowed = san is null || san.Id.Equals(model.Id);
             return Json(isAllowed);
         }
 
         public IActionResult Delete(int id)
         {
-            var branch = db.SanitaryDrain.Find(id);
-            db.SanitaryDrain.Remove(branch);
+            var san = db.SanitaryDrain.Find(id);
+            db.SanitaryDrain.Remove(san);
             db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }

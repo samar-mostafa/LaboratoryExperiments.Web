@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LaboratoryExperiments.Web.Data;
+using LaboratoryExperiments.Web.Data.DomainModels;
 using LaboratoryExperiments.Web.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -43,8 +44,26 @@ namespace LaboratoryExperiments.Web.Controllers
         [HttpPost]
         public IActionResult Create(CreateStationViewModel mdl)
         {
-            return RedirectToAction("Index");
+            if (!ModelState.IsValid)
+                return BadRequest();
+            var entity = mapper.Map<Station>(mdl);
+            db.Stations.Add(entity);
+            db.SaveChanges();
+            return Ok("station saved successfully");           
+        }
+        public IActionResult AllowItem(CreateStationViewModel model)
+        {
+            var station = db.Stations.SingleOrDefault(c => c.Name == model.Name);
+            var isAllowed = station is null || station.Id.Equals(model.Id);
+            return Json(isAllowed);
+        }
 
+        public IActionResult Delete(int id)
+        {
+            var station = db.Stations.Find(id);
+            db.Stations.Remove(station);
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

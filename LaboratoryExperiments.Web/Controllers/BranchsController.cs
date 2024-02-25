@@ -42,7 +42,7 @@ namespace LaboratoryExperiments.Web.Controllers
             };
             db.Branches.Add(entity);
             db.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            return Ok();
         }
         
             public IActionResult AllowItem(CreateBranchViewModel model)

@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<LaboratoryExperiments.Web.Data.ViewModels.StationViewModel>
-
+@section Styles {
+    <link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
 <div class="container-fluid px-4 mt-4">
     <div class="d-flex justify-content-between">
         <h1 class="mt-4">Stations</h1>
@@ -15,12 +17,12 @@
                     <tr>
                         <th>Name</th>
                         <th>Branch</th>
-                        <th>SanitaryDrain</th>
-                        <th>NumberOfStages</th>
-                        <th>ProcessingType</th>
-                        <th>ProcessingSystem</th>
-                        <th>DesignEnergy</th>                       
-                        <th>StationStatus</th>
+                        <th>Sanitary Drain</th>
+                        <th>Number Of Stages</th>
+                        <th>Processing Type</th>
+                        <th>Processing System</th>
+                        <th>Design Energy</th>                       
+                        <th>Station Status</th>
                         <th>Actions</th>
 
                     </tr>
@@ -40,7 +42,7 @@
                             <td>@item.StationStatus</td>
                             <td>
                                 <div class="menu-item px-3 js-Delete"
-                                     data-url="/SanitaryDrain/Delete/@item.Id">
+                                     data-url="/Stations/Delete/@item.Id">
                                     <a class="btn btn-danger js-render-modal">
                                         Delete
                                     </a>
@@ -53,7 +55,10 @@
         </div>
     </div>
 </div>
+@section Plugins {
 
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+}
 @section Scripts {
    
     <script>

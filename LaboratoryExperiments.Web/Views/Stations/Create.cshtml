@@ -1,79 +1,108 @@
 ﻿@model CreateStationViewModel
 
 @section Styles {
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
     <link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
 }
 
 <div class="container-fluid px-4 mt-4">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-center">
         <h1 class="mt-4">Add New Station</h1>
         
     </div>
-<form asp-action="Create" class="m-5 p-5">
+<form asp-action="Create" class="m-5 p-5"
+          data-ajax-method="post"
+          data-ajax="true" 
+          data-ajax-success="showSuccessMessage"
+          data-ajax-failure="showErrorMessage"
+          data-ajax-complete="onModelComplete">
 
     <div class="row">
 
-        <div class="form-floating col-md-6 pb-2">
-            <select  asp-items="@ViewBag.Branches" class="form-select js-select2Single "  asp-for="BranchId">
+        <div class="form-group col-md-6 pb-3">
+                <label asp-for="BranchId"></label>
+                <select id="BranchId" asp-items="@ViewBag.Branches" class="form-select js-select2 " asp-for="BranchId">
                 <option selected value="">Choose..</option>
             </select>
             <span asp-validation-for="BranchId" class="text-danger d-block"></span>
         </div>
-        <div class="form-floating col-md-6 pb-2">
-            <select  asp-items="@ViewBag.SanitaryDrains" class="form-select js-select2Single "  asp-for="SanitaryDrainId">
+        <div class="form-group col-md-6 pb-3">
+                <label asp-for="SanitaryDrainId"></label>
+                <select id="SanitaryDrainId" asp-items="@ViewBag.SanitaryDrain" class="form-select js-select2 " asp-for="SanitaryDrainId">
                 <option selected value="">Choose..</option>
             </select>
             <span asp-validation-for="SanitaryDrainId" class="text-danger d-block"></span>
         </div>
-        <div class="form-floating col-md-6 pb-2">
+        <div class="form-group col-md-6 pb-3">
+                <label asp-for="Name"></label>
             <input type="text" class="form-control" placeholder="" asp-for="Name" />
-            <label asp-for="Name">Name</label>
+          
             <span asp-validation-for="Name" class="text-danger d-block"></span>
         </div>
-        <div class="form-floating col-md-6 pb-2">
-            <input type="number" class="form-control" placeholder="" asp-for="NumberOfStages" />
-            <label asp-for="NumberOfStages"></label>
+        <div class="form-group col-md-6 pb-3">
+                <label asp-for="NumberOfStages"></label>
+            <input type="number" class="form-control" placeholder="" asp-for="NumberOfStages" />           
             <span asp-validation-for="NumberOfStages" class="text-danger d-block"></span>
         </div>
-        <div class="form-floating col-md-6 pb-2">
-            <select asp-items="@ViewBag.ProcessingSystem" class="form-select js-select2Single " asp-for="ProcessingSystemId">
+        <div class="form-group col-md-6 pb-3">
+                <label asp-for="ProcessingSystemId"></label>
+                <select id="ProcessingSystemId" asp-items="@ViewBag.ProcessingSystem" class="form-select js-select2 " asp-for="ProcessingSystemId">
                 <option selected value="">Choose..</option>
             </select>
-            <label asp-for="ProcessingSystemId"></label>
+           
             <span asp-validation-for="ProcessingSystemId" class="text-danger d-block"></span>
         </div>
-        <div class="form-floating col-md-6 pb-2">
-            <select asp-items="@ViewBag.ProcessingType" class="form-select js-select2Single " asp-for="ProcessingTypeId">
+        <div class="form-group col-md-6 pb-3">
+                <label asp-for="ProcessingTypeId"></label>
+                <select id="ProcessingTypeId" asp-items="@ViewBag.ProcessingType" class="form-select js-select2 " asp-for="ProcessingTypeId">
                 <option selected value="">Choose..</option>
             </select>
-            <label asp-for="ProcessingTypeId"></label>
+        
             <span asp-validation-for="ProcessingTypeId" class="text-danger d-block"></span>
         </div>
-        <div class="form-floating col-md-6 pb-2">
-            <select asp-items="@ViewBag.StationStatus" class="form-select js-select2Single " asp-for="StationStatusId">
+        <div class="form-group col-md-6 pb-3">
+                <label asp-for="StationStatusId"></label>
+                <select id="StationStatusId" asp-items="@ViewBag.StationStatus" class="form-select js-select2 " asp-for="StationStatusId">
                 <option selected value="">Choose..</option>
             </select>
-            <label asp-for="StationStatusId"></label>
+           
             <span asp-validation-for="StationStatusId" class="text-danger d-block"></span>
         </div>
-        <div class="form-floating col-md-6 pb-2">
+        <div class="form-group col-md-6 pb-3">
+                <label asp-for="DesignEnergy"></label>
             <input type="number" class="form-control" placeholder="" asp-for="DesignEnergy" />
-            <label asp-for="DesignEnergy"></label>
+       
             <span asp-validation-for="DesignEnergy" class="text-danger d-block"></span>
         </div>
        
        
     </div>
 
-    <partial name="_ModelFooter" />
+       <div class="col-md-2 m-auto">
+            <a asp-action="Index" asp-controller="Stations" class="btn btn-light">Back to list</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          
+       </div>
 
 </form>
 </div>
 
             @section Plugins {
 
+    <script src="~/lib/select2/js/select2.min.js"></script>
     <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
 }
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        function onModelComplete() {
+            $("form").trigger('reset');
+
+            $('#BranchId').prop('selectedIndex', 0).change();
+            $('#SanitaryDrainId').prop('selectedIndex', 0).change();
+            $('#ProcessingSystemId').prop('selectedIndex', 0).change();
+            $('#ProcessingTypeId').prop('selectedIndex', 0).change();
+            $('#StationStatusId').prop('selectedIndex', 0).change();
+        }
+    </script>
 }
