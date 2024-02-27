@@ -22,7 +22,7 @@ namespace LaboratoryExperiments.Web.Controllers
         {
             var entities = db.Tests.Include(t=>t.Experiment).ThenInclude(e=>e.ExperimentType)
                 .Include(t => t.Station).ThenInclude(s => s.Branch)
-                 .Include(t => t.Station).ThenInclude(s => s.SanitaryDrain).ToList();
+                 .Include(t => t.Station).ThenInclude(s => s.SanitaryDrain).ToList().OrderByDescending(t=>t.Id);
             var data = mapper.Map<IEnumerable<TestViewModel>>(entities);
             return View(data);
         }
@@ -41,7 +41,10 @@ namespace LaboratoryExperiments.Web.Controllers
                 return BadRequest();
 
             var experiment = db.Experiments.Find(model.ExperimentId);
-            if(model.In_Eff == false)            
+            if ((model.In_Eff == false || model.In_Eff == true) && 
+                (experiment.InffleuntValue == null || experiment.EffleuntValue == null))
+                model.Result = true;
+           else if (model.In_Eff == false)            
                 model.Result = experiment.InffleuntValue >= model.EnteredValue; 
             else
                 model.Result = experiment.EffleuntValue >= model.EnteredValue;

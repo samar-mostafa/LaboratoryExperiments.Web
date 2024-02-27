@@ -14,10 +14,10 @@ namespace LaboratoryExperiments.Web.Data.ViewModels
         [Display(Name = "unit")]
         public int UnitId { get; set; }
         [Display(Name = "Inffleunt Value")]
-        public float InffleuntValue { get; set; }
+        public float? InffleuntValue { get; set; }
 
         [Display(Name = "Effleunt Value")]
-        public float EffleuntValue { get; set; }
+        public float? EffleuntValue { get; set; }
         [Display(Name = "Experiment Type")]
         public int ExperimentTypeId { get; set; }
     }

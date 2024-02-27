@@ -9,8 +9,8 @@ namespace LaboratoryExperiments.Web.Data.DomainModels
         public string Name { get; set; }
         public int UnitId { get; set; }
         public Unit Unit { get; set; }
-        public float InffleuntValue { get; set; }
-        public float EffleuntValue { get; set; }
+        public float? InffleuntValue { get; set; }
+        public float? EffleuntValue { get; set; }
         public int ExperimentTypeId { get; set; }
         public ExperimentType ExperimentType { get; set; }
     }
