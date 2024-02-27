@@ -12,7 +12,7 @@ namespace LaboratoryExperiments.Web.Data.ViewModels
         [Remote("AllowItem", null, ErrorMessage = "this name is allready exist!")]
         public string Name { get; set; }
         [Display(Name = "unit")]
-        public int UnitId { get; set; }
+        public int? UnitId { get; set; }
         [Display(Name = "Inffleunt Value")]
         public float? InffleuntValue { get; set; }
 

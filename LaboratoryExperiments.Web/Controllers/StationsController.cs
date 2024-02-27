@@ -65,5 +65,17 @@ namespace LaboratoryExperiments.Web.Controllers
             db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
+
+        public IActionResult Details(int id)
+        {
+            var station = db.Stations.Include(s => s.SanitaryDrain).
+                Include(s => s.ProcessingType).
+                Include(s => s.Branch).
+                Include(s => s.StationStatus).
+                Include(s => s.ProcessingSystem).SingleOrDefault(s=>s.Id==id);
+            var mappingData = mapper.Map<StationViewModel>(station);
+            return View(mappingData);
+        }
     }
 }

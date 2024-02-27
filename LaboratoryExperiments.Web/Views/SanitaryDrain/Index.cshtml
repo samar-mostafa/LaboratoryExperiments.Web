@@ -31,7 +31,7 @@
                             <td>
                                 @foreach (var station in item.Stations)
                                 {
-                                    <span>@station,</span>
+                                    <a asp-action="Details" asp-controller="Stations" asp-route-id="@station.Id">@station.Name ,</a>
                                 }
                             </td>
                             <td>

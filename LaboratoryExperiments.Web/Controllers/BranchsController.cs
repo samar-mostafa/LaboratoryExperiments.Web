@@ -20,7 +20,11 @@ namespace LaboratoryExperiments.Web.Controllers
             var branches = db.Branches.Include(b => b.Stations).Select(b => new BranchViewModel
             { Id=b.Id,
                 Name = b.Name,
-                Stations = b.Stations.Select(s => s.Name).ToList()
+                Stations = b.Stations.Select(s =>new IdNameViewModel
+                {
+                    Id=s.Id,
+                    Name = s.Name,
+                }).ToList()
             });
             return View(branches);
         }
