@@ -1,5 +1,6 @@
 using LaboratoryExperiments.Web.Data;
 using LaboratoryExperiments.Web.Data.Mapping;
+using LaboratoryExperiments.Web.Data.Seeds;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -32,6 +33,12 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+var scope = scopeFactory.CreateScope();
+var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+
+await DefaultUsers.AddAdminUserAsync(userManager);
 
 app.MapControllerRoute(
     name: "default",

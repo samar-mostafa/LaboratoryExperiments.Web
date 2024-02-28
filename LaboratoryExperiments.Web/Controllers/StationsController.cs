@@ -2,12 +2,14 @@
 using LaboratoryExperiments.Web.Data;
 using LaboratoryExperiments.Web.Data.DomainModels;
 using LaboratoryExperiments.Web.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace LaboratoryExperiments.Web.Controllers
 {
+    [Authorize]
     public class StationsController : Controller
     {
         private readonly ApplicationDbContext db;

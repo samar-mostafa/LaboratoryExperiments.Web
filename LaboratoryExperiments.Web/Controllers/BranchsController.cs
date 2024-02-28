@@ -1,12 +1,14 @@
 ﻿using LaboratoryExperiments.Web.Data;
 using LaboratoryExperiments.Web.Data.DomainModels;
 using LaboratoryExperiments.Web.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 
 namespace LaboratoryExperiments.Web.Controllers
 {
+    [Authorize]
     public class BranchsController : Controller
     {
         private readonly ApplicationDbContext db;

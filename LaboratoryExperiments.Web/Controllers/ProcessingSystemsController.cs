@@ -1,10 +1,12 @@
 ﻿using LaboratoryExperiments.Web.Data;
 using LaboratoryExperiments.Web.Data.DomainModels;
 using LaboratoryExperiments.Web.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LaboratoryExperiments.Web.Controllers
 {
+    [Authorize]
     public class ProcessingSystemsController : Controller
     {
         private readonly ApplicationDbContext db;

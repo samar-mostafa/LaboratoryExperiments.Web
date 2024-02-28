@@ -2,6 +2,7 @@
 using LaboratoryExperiments.Web.Data;
 using LaboratoryExperiments.Web.Data.DomainModels;
 using LaboratoryExperiments.Web.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using System.Collections;
 
 namespace LaboratoryExperiments.Web.Controllers
 {
+    [Authorize]
     public class TestsController : Controller
     {
         private readonly ApplicationDbContext db;
@@ -41,8 +43,15 @@ namespace LaboratoryExperiments.Web.Controllers
                 return BadRequest();
 
             var experiment = db.Experiments.Find(model.ExperimentId);
-            if ((model.In_Eff == false || model.In_Eff == true) && 
-                (experiment.InffleuntValue == null || experiment.EffleuntValue == null))
+
+            if(experiment.Unit is null)
+            {
+                if (model.In_Eff == false)
+                    model.Result =  model.EnteredValue>=6 && model.EnteredValue<=9.5;
+                else
+                    model.Result = experiment.EffleuntValue >=6  &&model.EnteredValue <=9;
+            }
+            else if ((model.In_Eff == false || model.In_Eff == true) && (experiment.InffleuntValue == null || experiment.EffleuntValue == null))
                 model.Result = true;
            else if (model.In_Eff == false)            
                 model.Result = experiment.InffleuntValue >= model.EnteredValue; 
