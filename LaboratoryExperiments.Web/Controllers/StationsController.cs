@@ -79,5 +79,12 @@ namespace LaboratoryExperiments.Web.Controllers
             var mappingData = mapper.Map<StationViewModel>(station);
             return View(mappingData);
         }
+
+        public IActionResult GetStationsByBranchId(int id)
+        {
+            var stations = db.Stations.Where(s => s.BranchId == id).Select(s => new SelectListItem {Value=s.Id.ToString() ,Text=s.Name });
+            return Json(stations);
+
+        }
     }
 }

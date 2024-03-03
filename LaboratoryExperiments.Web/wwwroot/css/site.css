@@ -20,3 +20,60 @@ html {
 /*body {
   margin-bottom: 60px;
 }*/
+
+.filtered h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 160px;
+    text-align: center;
+    margin: auto;
+    white-space: nowrap;
+    padding-bottom: 13px;
+}
+
+    .filtered h1:before {
+        background-color: #c50000;
+        content: '';
+        display: block;
+        height: 4px;
+        width: 210px;
+        margin-bottom: 5px;
+    }
+
+    .filtered h1:after {
+        background-color: #c50000;
+        content: '';
+        display: block;
+        position: relative;
+        right: 0;
+        bottom: 0;
+        height: 4px;
+        width: 210px;
+        margin-bottom: 0.25em;
+    }
+.one h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 300;
+    color: #222;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    grid-template-rows: 27px 0;
+    grid-gap: 20px;
+    align-items: center;
+}
+
+.one h1:after, .one h1:before {
+    content: " ";
+    display: block;
+    border-bottom: 1px solid #c50000;
+    border-top: 1px solid #c50000;
+    height: 5px;
+    background-color: #f8f8f8;
+}
+
+  

@@ -1,0 +1,205 @@
+﻿
+@model FilterByViewModel
+@{
+    ViewData["Title"] = "Filter";
+}
+
+@section Styles {
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />   
+}
+
+<div class="container-fluid px-4 mt-4">
+    <div class="one" >
+        <h1>Search For A Test</h1>
+
+    </div>
+    <form asp-action="Create" class="m-5">
+        <div class="row">
+            <div class="form-group col-md-6 pb-3">
+                <label asp-for="BranchId"></label>
+                <select onchange="getStations(this.value)" id="BranchId" asp-items="@ViewBag.Branchs" class="form-select js-select2 " asp-for="BranchId">
+                    <option selected value="">Choose..</option>
+                </select>
+
+            </div>
+            <div class="form-group col-md-6 pb-3">
+                <label asp-for="StationId"></label>
+                <select id="StationId" asp-items="@ViewBag.Stations" class="form-select js-select2 " asp-for="StationId">
+                    <option selected value="">Choose..</option>
+                </select>
+
+            </div>
+            <div class="form-group col-md-6 pb-3">
+                <label asp-for="ExperimentId"></label>
+                <select id="ExperimentId" asp-items="@ViewBag.Experiments" class="form-select js-select2 " asp-for="ExperimentId">
+                    <option selected value="">Choose..</option>
+                </select>
+                
+            </div>
+            <div class="form-group col-md-6 pb-3">
+                <label asp-for="ExperimentTypeId"></label>
+                <select id="ExperimentTypeId" asp-items="@ViewBag.ExperimentTypes" class="form-select js-select2 " asp-for="ExperimentTypeId">
+                    <option selected value="">Choose..</option>
+                </select>
+
+            </div>
+            
+            <div class="form-group col-md-6 ">
+                <label asp-for="Date"></label>
+                <input type="date" class="form-control" placeholder="" asp-for="Date" />
+             
+            </div>
+            <div class="form-group col-md-5 m-4">
+                <button class="btn btn-primary w-75" type="button" onclick="getDataByFilter()">Search...</button>
+            </div>
+        </div>
+     
+    </form>
+</div>
+<div class="container">
+    <div class="filtered">
+        <h1>Search Result</h1>
+    </div>
+    <div class="d-flex flex-row-reverse">
+        <div class="m-2">
+            <form asp-action="ExportToExcel" method="post">
+                <div class="row m-5 " hidden>
+                    <input asp-for="BranchId" />
+                    <input asp-for=StationId />
+                    <input asp-for=ExperimentId />
+                    <input asp-for="ExperimentTypeId" />
+                    <input asp-for="Date" />
+
+                </div>
+                <input  value="Excel" type="submit" />
+            </form>
+
+        </div>
+        <div class="m-2">
+            <form asp-action="ExportToPdf" method="post">
+                <div class="row m-5 " hidden>
+                    <input  asp-for="BranchId" />
+                    <input  asp-for=StationId />
+                    <input  asp-for=ExperimentId />
+                    <input  asp-for="ExperimentTypeId" />
+                    <input  asp-for="Date" />
+                 
+                </div>
+                <input  value="pdf" type="submit" />
+            </form>
+        </div>
+
+    </div>
+    <table id="SearchedTestsTable" class="table table-striped table-bordered dt-responsive nowrap">
+
+        <thead>
+
+            <tr>
+                <th>Branch</th>
+                <th>Station</th>
+                <th>Sanitary Drain</th>
+                <th>Experiment</th>
+                <th>Experiment Type</th>
+                <th>Date</th>
+                <th>Inffleunt/Effleunt </th>
+                <th>Reference value</th>
+                <th>Entered Value</th>
+                <th>Result</th>
+
+
+            </tr>
+        </thead>
+        <tbody id="tBody">
+        </tbody>
+
+    </table>
+</div>
+
+
+@section Plugins {
+
+    <script src="~/lib/select2/js/select2.min.js"></script>
+    <script src="~/lib/moment.js/moment.min.js"></script>
+   
+}
+@section Scripts {
+    <script>
+        function getStations(id) {
+            $.get({
+                url: "/Stations/GetStationsByBranchId/" + id,
+                success: function (data) {
+                   
+                    var html = '`<option value="">Choose...</option>';
+                    $.each(data, function (key, value) {
+                       
+                        html += `<option value=${value.value}>${value.text}</option>`
+                    });
+                    $('#StationId').html(html)
+                },
+                error: function () {
+                    showErrorMessage();
+                }
+            })
+        }
+
+        function getDataByFilter() {
+            var data = {
+                BranchId: document.getElementById("BranchId").value,
+                StationId: document.getElementById("StationId").value,
+                Date: document.getElementById("Date").value,
+                ExperimentId: document.getElementById("ExperimentId").value,
+                ExperimentTypeId: document.getElementById("ExperimentTypeId").value,
+            }
+            var table = $("#SearchedTestsTable").DataTable({
+                searching: false,
+                "bDestroy": true,
+                processing: true,
+                serverSide: true,
+                order: [[5, 'desc']],
+                "ajax": {
+                    //IP +
+                    url: "/Tests/GetFilteredData",
+                    type: "post",
+                    dataType: 'json',
+                    data: data,
+                },
+                "columns": [
+
+                    { "data": "branch", "name": "Branch", "autowidth": true },
+
+                    { "data": "station", "name": "Station", "autowidth": true },
+                    { "data": "sanitaryDrain", "name": "SanitaryDrain", "autowidth": true },
+                    { "data": "experiment", "name": "Experiment", "autowidth": true },
+                    { "data": "experimentType", "name": "ExperimentType", "autowidth": true },
+                    {
+                        'name': 'Date',
+                        "render": function (data, type, row) {
+                            return moment(row.date).format("YYYY-MM-DD");
+                        }
+                    },
+                    {
+                        'name': 'In_Eff',
+                        "render": function (data, type, row) {
+                            return row.in_Eff == false ? "Inffleunt" : "Effleunt";
+                        }
+                    },
+                    {
+                        'name': 'In_Eff',
+                        "render": function (data, type, row) {
+                            return row.in_Eff == false ? row.inffleuntValue : row.effleuntValue;
+                        }
+                    },
+                    { "data": "enteredValue", "name": "EnteredValue", "autowidth": true },
+                    {
+                        'name': 'Result',
+                        "render": function (data, type, row) {
+                            return row.result != false ? "Identical" : "Not matching";
+                        }
+                    }
+                ]
+            })
+                }
+      
+    </script>
+}
+
