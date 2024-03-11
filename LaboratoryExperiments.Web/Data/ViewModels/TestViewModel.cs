@@ -18,4 +18,13 @@ namespace LaboratoryExperiments.Web.Data.ViewModels
         public DateTime Date { get; set; }
        
     }
+
+    public class FilteredTestViewModel:TestViewModel
+    {
+        public string In_EffWord { get; set; }
+        public string ResultWord { get; set; }
+        public string Datestring { get; set; }
+
+    }
+
 }

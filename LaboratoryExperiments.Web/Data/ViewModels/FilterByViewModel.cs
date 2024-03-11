@@ -14,5 +14,8 @@ namespace LaboratoryExperiments.Web.Data.ViewModels
         public int? ExperimentId { get; set; }
         [Display(Name = "ExperimentType")]
         public int? ExperimentTypeId { get; set; }
+      
     }
+
+    
 }

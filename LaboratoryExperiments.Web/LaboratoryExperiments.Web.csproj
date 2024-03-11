@@ -8,6 +8,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Reports\DataSet1.cs" />
+    <Content Remove="wwwroot\Reports\DataSet1.Designer.cs" />
+    <Content Remove="wwwroot\Reports\DataSet1.xsc" />
+    <Content Remove="wwwroot\Reports\DataSet1.xsd" />
+    <Content Remove="wwwroot\Reports\DataSet1.xss" />
+    <Content Remove="wwwroot\Reports\FilteredTests.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="wwwroot\Reports\DataSet1.cs" />
+    <Compile Include="wwwroot\Reports\DataSet1.Designer.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\Reports\FilteredTests.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.2" />
@@ -33,6 +57,16 @@
 
   <ItemGroup>
     <Folder Include="Data\Const\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Reports\DataSet1.xsc" />
+    <None Include="wwwroot\Reports\DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Include="wwwroot\Reports\DataSet1.xss" />
   </ItemGroup>
 
 </Project>

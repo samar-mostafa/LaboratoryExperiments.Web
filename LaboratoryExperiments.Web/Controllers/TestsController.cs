@@ -112,23 +112,24 @@ namespace LaboratoryExperiments.Web.Controllers
         }
 
 
+        [HttpPost]
         public IActionResult ExportToPdf(FilterByViewModel mdl)
         {
             var entities = getData(mdl);
-            var mappedData = mapper.Map<IEnumerable<TestViewModel>>(entities);
-            string path = $"{webHostEnvironment.WebRootPath}\\Reports\\filteredTests.rdlc";
+            var mappedData = mapper.Map<IEnumerable<FilteredTestViewModel>>(entities);
+            string path = $"{webHostEnvironment.WebRootPath}\\Reports\\FilteredTests.rdlc";
             LocalReport localReport = new LocalReport(path);
             localReport.AddDataSource("DataSet1", mappedData);
             var report = localReport.Execute(RenderType.Pdf, 1, null, "");
             return File(report.MainStream, "application/pdf");
-            var report2 = localReport.Execute(RenderType.Excel, 1, null, "");
-            return File(report.MainStream, "application/vnd.ms-excel");
+           
+           
         }
         public IActionResult ExportToExcel(FilterByViewModel mdl)
         {
             var entities = getData(mdl);
-            var mappedData = mapper.Map<IEnumerable<TestViewModel>>(entities);
-            string path = $"{webHostEnvironment.WebRootPath}\\Reports\\filteredTests.rdlc";
+            var mappedData = mapper.Map<IEnumerable<FilteredTestViewModel>>(entities);
+            string path = $"{webHostEnvironment.WebRootPath}\\Reports\\FilteredTests.rdlc";
             LocalReport localReport = new LocalReport(path);
             localReport.AddDataSource("DataSet1", mappedData);           
             var report= localReport.Execute(RenderType.Excel, 1, null, "");
