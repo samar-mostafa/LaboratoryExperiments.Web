@@ -293,9 +293,7 @@ namespace LaboratoryExperiments.Web.wwwroot.Reports {
             
             private global::System.Data.DataColumn columnResultWord;
             
-            private global::System.Data.DataColumn columnInffleuntValue;
-            
-            private global::System.Data.DataColumn columnEffleuntValue;
+            private global::System.Data.DataColumn columnReferenceValue;
             
             private global::System.Data.DataColumn columnEnteredValue;
             
@@ -392,17 +390,9 @@ namespace LaboratoryExperiments.Web.wwwroot.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn InffleuntValueColumn {
+            public global::System.Data.DataColumn ReferenceValueColumn {
                 get {
-                    return this.columnInffleuntValue;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn EffleuntValueColumn {
-                get {
-                    return this.columnEffleuntValue;
+                    return this.columnReferenceValue;
                 }
             }
             
@@ -459,7 +449,7 @@ namespace LaboratoryExperiments.Web.wwwroot.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string Station, string Branch, string SanitaryDrain, string Experiment, string ExperimentType, bool In_EffWord, bool ResultWord, float InffleuntValue, float EffleuntValue, float EnteredValue, string Datestring) {
+            public DataTable1Row AddDataTable1Row(string Station, string Branch, string SanitaryDrain, string Experiment, string ExperimentType, bool In_EffWord, bool ResultWord, float ReferenceValue, float EnteredValue, string Datestring) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Station,
@@ -469,8 +459,7 @@ namespace LaboratoryExperiments.Web.wwwroot.Reports {
                         ExperimentType,
                         In_EffWord,
                         ResultWord,
-                        InffleuntValue,
-                        EffleuntValue,
+                        ReferenceValue,
                         EnteredValue,
                         Datestring};
                 rowDataTable1Row.ItemArray = columnValuesArray;
@@ -502,8 +491,7 @@ namespace LaboratoryExperiments.Web.wwwroot.Reports {
                 this.columnExperimentType = base.Columns["ExperimentType"];
                 this.columnIn_EffWord = base.Columns["In_EffWord"];
                 this.columnResultWord = base.Columns["ResultWord"];
-                this.columnInffleuntValue = base.Columns["InffleuntValue"];
-                this.columnEffleuntValue = base.Columns["EffleuntValue"];
+                this.columnReferenceValue = base.Columns["ReferenceValue"];
                 this.columnEnteredValue = base.Columns["EnteredValue"];
                 this.columnDatestring = base.Columns["Datestring"];
             }
@@ -525,10 +513,8 @@ namespace LaboratoryExperiments.Web.wwwroot.Reports {
                 base.Columns.Add(this.columnIn_EffWord);
                 this.columnResultWord = new global::System.Data.DataColumn("ResultWord", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnResultWord);
-                this.columnInffleuntValue = new global::System.Data.DataColumn("InffleuntValue", typeof(float), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnInffleuntValue);
-                this.columnEffleuntValue = new global::System.Data.DataColumn("EffleuntValue", typeof(float), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEffleuntValue);
+                this.columnReferenceValue = new global::System.Data.DataColumn("ReferenceValue", typeof(float), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReferenceValue);
                 this.columnEnteredValue = new global::System.Data.DataColumn("EnteredValue", typeof(float), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEnteredValue);
                 this.columnDatestring = new global::System.Data.DataColumn("Datestring", typeof(string), null, global::System.Data.MappingType.Element);
@@ -787,33 +773,17 @@ namespace LaboratoryExperiments.Web.wwwroot.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public float InffleuntValue {
+            public float ReferenceValue {
                 get {
                     try {
-                        return ((float)(this[this.tableDataTable1.InffleuntValueColumn]));
+                        return ((float)(this[this.tableDataTable1.ReferenceValueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'InffleuntValue\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ReferenceValue\' in table \'DataTable1\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.InffleuntValueColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public float EffleuntValue {
-                get {
-                    try {
-                        return ((float)(this[this.tableDataTable1.EffleuntValueColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EffleuntValue\' in table \'DataTable1\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDataTable1.EffleuntValueColumn] = value;
+                    this[this.tableDataTable1.ReferenceValueColumn] = value;
                 }
             }
             
@@ -935,26 +905,14 @@ namespace LaboratoryExperiments.Web.wwwroot.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsInffleuntValueNull() {
-                return this.IsNull(this.tableDataTable1.InffleuntValueColumn);
+            public bool IsReferenceValueNull() {
+                return this.IsNull(this.tableDataTable1.ReferenceValueColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetInffleuntValueNull() {
-                this[this.tableDataTable1.InffleuntValueColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsEffleuntValueNull() {
-                return this.IsNull(this.tableDataTable1.EffleuntValueColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetEffleuntValueNull() {
-                this[this.tableDataTable1.EffleuntValueColumn] = global::System.Convert.DBNull;
+            public void SetReferenceValueNull() {
+                this[this.tableDataTable1.ReferenceValueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

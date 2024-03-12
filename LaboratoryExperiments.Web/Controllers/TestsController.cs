@@ -50,18 +50,15 @@ namespace LaboratoryExperiments.Web.Controllers
 
             var experiment = db.Experiments.Find(model.ExperimentId);
 
-            if(experiment.Unit is null)
-            {
-                if (model.In_Eff == false)
-                    model.Result =  model.EnteredValue>=6 && model.EnteredValue<=9.5;
-                else
-                    model.Result = experiment.EffleuntValue >=6  &&model.EnteredValue <=9;
-            }
-            else if ((model.In_Eff == false || model.In_Eff == true) && (experiment.InffleuntValue == null || experiment.EffleuntValue == null))
+            if ((model.In_Eff == false || model.In_Eff == true) && (experiment.InffleuntValue == null || experiment.EffleuntValue == null))
                 model.Result = true;
-           else if (model.In_Eff == false)            
-                model.Result = experiment.InffleuntValue >= model.EnteredValue; 
-            else
+            else if (model.In_Eff == false && experiment.InffleuntValueTo != null)
+                model.Result = model.EnteredValue >= experiment.InffleuntValue && model.EnteredValue <= experiment.InffleuntValueTo;
+            else if (model.In_Eff == false && experiment.InffleuntValueTo is null)
+                model.Result = experiment.InffleuntValue >= model.EnteredValue;
+            else if (model.In_Eff == true && experiment.EffleuntValueTo != null)
+                model.Result = model.EnteredValue >= experiment.EffleuntValue && model.EnteredValue <= experiment.EffleuntValueTo;
+            else if (model.In_Eff == true && experiment.EffleuntValueTo is null)
                 model.Result = experiment.EffleuntValue >= model.EnteredValue;
 
             var entity = mapper.Map<Test>(model);

@@ -22,6 +22,14 @@ namespace LaboratoryExperiments.Web.wwwroot.Reports
 {
 }
 
+namespace LaboratoryExperiments.Web.wwwroot.Reports
+{
+}
+
+namespace LaboratoryExperiments.Web.wwwroot.Reports
+{
+}
+
 namespace WinFormsApp1
 {
 }

@@ -33,8 +33,8 @@
                         <tr>
                             <td>@item.Name</td>
                             <td>@item.Unit</td>
-                            <td>@item.InffleuntValue</td>
-                            <td>@item.EffleuntValue</td>
+                            <td>@(item.InffleuntValueTo != null ? item.InffleuntValue + "-" + item.InffleuntValueTo : item.InffleuntValue)  </td>
+                            <td> @(item.EffleuntValueTo != null ? item.EffleuntValue + "-" + item.EffleuntValueTo : item.EffleuntValue)</td>
                             <td>@item.ExperimentType</td>
                            
                             <td>

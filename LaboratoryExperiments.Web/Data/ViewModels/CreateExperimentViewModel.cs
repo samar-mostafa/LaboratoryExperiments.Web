@@ -15,9 +15,13 @@ namespace LaboratoryExperiments.Web.Data.ViewModels
         public int? UnitId { get; set; }
         [Display(Name = "Inffleunt Value")]
         public float? InffleuntValue { get; set; }
+        [Display(Name = "Inffleunt Value To")]
+        public float? InffleuntValueTo { get; set; }
 
         [Display(Name = "Effleunt Value")]
         public float? EffleuntValue { get; set; }
+        [Display(Name = "Effleunt Value To")]
+        public float? EffleuntValueTo { get; set; }
         [Display(Name = "Experiment Type")]
         public int ExperimentTypeId { get; set; }
     }

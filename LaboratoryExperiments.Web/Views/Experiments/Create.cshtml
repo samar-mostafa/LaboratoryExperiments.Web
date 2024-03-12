@@ -42,15 +42,33 @@
 
             <div class="form-group col-md-6 pb-3">
                 <label asp-for="InffleuntValue"></label>
-                <input type="text" class="form-control" placeholder="" asp-for="InffleuntValue" />
+                <input type="number" class="form-control" placeholder="" asp-for="InffleuntValue" />
 
                 <span asp-validation-for="InffleuntValue" class="text-danger d-block"></span>
             </div>
             <div class="form-group col-md-6 pb-3">
+                <label asp-for="InffleuntValueTo"></label>
+                <input type="number" class="form-control" placeholder="" asp-for="InffleuntValueTo" />
+                <div class="form-text">
+                    Insert inffleunt value to if exist
+                </div>
+
+                <span asp-validation-for="InffleuntValueTo" class="text-danger d-block"></span>
+            </div>
+            <div class="form-group col-md-6 pb-3">
                 <label asp-for="EffleuntValue"></label>
-                <input type="text" class="form-control" placeholder="" asp-for="EffleuntValue" />
+                <input type="number" class="form-control" placeholder="" asp-for="EffleuntValue" />
 
                 <span asp-validation-for="EffleuntValue" class="text-danger d-block"></span>
+            </div>
+            <div class="form-group col-md-6 pb-3">
+                <label asp-for="EffleuntValueTo"></label>
+                <input type="number" class="form-control" placeholder="" asp-for="EffleuntValueTo" />
+                <div class="form-text">
+                    Insert effleunt value to if exist
+                </div>
+
+                <span asp-validation-for="EffleuntValueTo" class="text-danger d-block"></span>
             </div>
       
         

@@ -39,7 +39,9 @@
                             <td>@item.ExperimentType</td>
                             <td>@item.Date.ToShortDateString()</td>
                             <td>@(item.In_Eff == false ? "Inffleunt" :"Effleunt")</td>
-                            <td>@(item.In_Eff == false ? item.InffleuntValue : item.EffleuntValue)</td>
+                            <td>@(item.In_Eff == false ? (item.InffleuntValueTo != null ? item.InffleuntValue + "-" + item.InffleuntValueTo : item.InffleuntValue)
+                                    : (item.EffleuntValueTo != null ? item.EffleuntValue + "-" + item.EffleuntValueTo : item.EffleuntValue))
+                            </td>
                             <td>@item.EnteredValue</td>
                             <td>@(item.Result != false ? "Identical" : "Not matching")</td>
                         </tr>

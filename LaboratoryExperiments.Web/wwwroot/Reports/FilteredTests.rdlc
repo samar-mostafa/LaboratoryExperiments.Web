@@ -24,9 +24,6 @@
               <Width>0.94792in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.79167in</Width>
-            </TablixColumn>
-            <TablixColumn>
               <Width>0.875in</Width>
             </TablixColumn>
             <TablixColumn>
@@ -249,40 +246,6 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox20">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Inffleunt Value</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox20</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="Textbox22">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -290,7 +253,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Effleunt Value</Value>
+                              <Value>Reference Value</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -616,14 +579,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="InffleuntValue">
+                    <Textbox Name="ReferenceValue">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!InffleuntValue.Value</Value>
+                              <Value>=Fields!ReferenceValue.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -632,39 +595,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>InffleuntValue</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="EffleuntValue">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!EffleuntValue.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>EffleuntValue</rd:DefaultName>
+                      <rd:DefaultName>ReferenceValue</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -790,7 +721,6 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
-            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -808,10 +738,10 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <KeepTogether>true</KeepTogether>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.60764in</Top>
-        <Left>0.10292in</Left>
+        <Top>0.3611in</Top>
+        <Left>0.13069in</Left>
         <Height>0.5in</Height>
-        <Width>11.25348in</Width>
+        <Width>10.46181in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -840,7 +770,7 @@
         <rd:DefaultName>Textbox34</rd:DefaultName>
         <Top>0.06944in</Top>
         <Left>4.12376in</Left>
-        <Height>0.3368in</Height>
+        <Height>0.26388in</Height>
         <Width>3.45833in</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -859,13 +789,13 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.35764in</Height>
+    <Height>0.93056in</Height>
     <Style />
   </Body>
   <Width>11.4675in</Width>
   <Page>
     <PageHeader>
-      <Height>1.41889in</Height>
+      <Height>1.33556in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -885,7 +815,9 @@
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style />
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
                 </Paragraph>
                 <Paragraph>
                   <TextRuns>
@@ -926,7 +858,7 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Left</TextAlign>
+                    <TextAlign>Center</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
@@ -964,7 +896,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>الشركة القابضه لمياه الشرب والصرف الصحي</Value>
+                      <Value>   الشركة القابضه لمياه الشرب والصرف الصحي</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -972,7 +904,7 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Right</TextAlign>
+                    <TextAlign>Center</TextAlign>
                   </Style>
                 </Paragraph>
                 <Paragraph>
@@ -987,7 +919,7 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Right</TextAlign>
+                    <TextAlign>Center</TextAlign>
                   </Style>
                 </Paragraph>
                 <Paragraph>
@@ -1001,7 +933,7 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Right</TextAlign>
+                    <TextAlign>Center</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
@@ -1071,7 +1003,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Created by:It Software Team</Value>
+                  <Value>Created by:IT Software Team</Value>
                   <Style>
                     <FontWeight>Bold</FontWeight>
                   </Style>
@@ -1081,6 +1013,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
+          <Top>0in</Top>
           <Left>0.10292in</Left>
           <Height>0.21875in</Height>
           <Width>2in</Width>
@@ -1150,12 +1083,8 @@
           <DataField>ResultWord</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
-        <Field Name="InffleuntValue">
-          <DataField>InffleuntValue</DataField>
-          <rd:TypeName>System.Single</rd:TypeName>
-        </Field>
-        <Field Name="EffleuntValue">
-          <DataField>EffleuntValue</DataField>
+        <Field Name="ReferenceValue">
+          <DataField>ReferenceValue</DataField>
           <rd:TypeName>System.Single</rd:TypeName>
         </Field>
         <Field Name="EnteredValue">

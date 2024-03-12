@@ -7,6 +7,8 @@
         public string Unit { get; set; }
         public float? InffleuntValue { get; set; }
         public float? EffleuntValue { get; set; }
+        public float? InffleuntValueTo { get; set; }
+        public float? EffleuntValueTo { get; set; }
         public string ExperimentType { get; set; }
     }
 }
