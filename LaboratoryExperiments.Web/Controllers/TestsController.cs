@@ -1,4 +1,5 @@
 ﻿using AspNetCore.Reporting;
+using AspNetCore.Reporting.ReportExecutionService;
 using AutoMapper;
 using LaboratoryExperiments.Web.Data;
 using LaboratoryExperiments.Web.Data.DomainModels;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using System.Linq.Dynamic.Core;
+using System.Security.Cryptography;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LaboratoryExperiments.Web.Controllers
@@ -108,8 +110,34 @@ namespace LaboratoryExperiments.Web.Controllers
             return Ok(jsonData);
         }
 
+        [HttpGet]
+        public IActionResult FilterByStationAndDate()
+        {
+            ViewBag.Branchs = db.Branches.OrderBy(b => b.Name).Select(b => new SelectListItem { Value = b.Id.ToString(), Text = b.Name }).ToList();
+            ViewBag.Stations = db.Stations.OrderBy(b => b.Name).Select(b => new SelectListItem { Value = b.Id.ToString(), Text = b.Name }).ToList();
+            return View();
+        }
 
         [HttpPost]
+        public IActionResult FilterByStationAndDate(FilterByStationAndDateViewModel mdl)
+        {
+            if(!ModelState.IsValid) 
+                return BadRequest(ModelState);
+            var entities = db.Tests.Include(t => t.Experiment).ThenInclude(e => e.ExperimentType).
+                Include(t => t.Station).ThenInclude(s => s.Branch)
+               .Include(t => t.Station).ThenInclude(s => s.SanitaryDrain).Where(t =>              
+               (t.StationId == mdl.StationId ) &&
+               (t.Station.BranchId == mdl.BranchId || mdl.BranchId == null) &&
+               (t.Date == mdl.Date));
+            var mappedData = mapper.Map<IEnumerable<FilteredTestViewModel>>(entities);
+            string path = $"{webHostEnvironment.WebRootPath}\\Reports\\FilterByStationAndDate.rdlc";
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("DataSet1", mappedData);
+            var report = localReport.Execute(RenderType.Pdf, 1, null, "");
+            return File(report.MainStream, "application/pdf");
+        }
+
+            [HttpPost]
         public IActionResult ExportToPdf(FilterByViewModel mdl)
         {
             var entities = getData(mdl);

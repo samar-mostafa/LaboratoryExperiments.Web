@@ -1,0 +1,48 @@
+﻿@model FilterByStationAndDateViewModel
+@section Styles {
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+}
+
+<div class="container-fluid px-4 mt-4">
+    <div class="one">
+        <h1>Search ....</h1>
+
+    </div>
+    <form asp-action="FilterByStationAndDate" class="m-5">
+        <div class="row">
+            <div class="form-group col-md-4 pb-3">
+                <label asp-for="BranchId"></label>
+                <select onchange="getStations(this.value)" id="BranchId" asp-items="@ViewBag.Branchs" class="form-select js-select2 " asp-for="BranchId">
+                    <option selected value="">Choose..</option>
+                </select>
+                
+
+            </div>
+            <div class="form-group col-md-4 pb-3">
+                <label asp-for="StationId"></label>
+                <select id="StationId" asp-items="@ViewBag.Stations" class="form-select js-select2 " asp-for="StationId">
+                    <option selected value="">Choose..</option>
+                </select>
+                <span asp-validation-for="StationId" class="text-danger d-block"></span>
+            </div>
+           
+
+            <div class="form-group col-md-4 ">
+                <label asp-for="Date"></label>
+                <input type="date" class="form-control" placeholder="" asp-for="Date" id="Date" />
+                <span asp-validation-for="Date" class="text-danger d-block"></span>
+            </div>
+            <div class="form-group col-md-5 m-auto">
+                <button class="btn btn-primary w-50 " type="submit" >Show Report</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+    @section Plugins {
+
+    <script src="~/lib/select2/js/select2.min.js"></script>
+    }
+    @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    }

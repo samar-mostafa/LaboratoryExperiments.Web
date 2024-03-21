@@ -1,4 +1,20 @@
-﻿
+﻿function getStations(id) {
+    $.get({
+        url: "/Stations/GetStationsByBranchId/" + id,
+        success: function (data) {
+
+            var html = '`<option value="">Choose...</option>';
+            $.each(data, function (key, value) {
+
+                html += `<option value=${value.value}>${value.text}</option>`
+            });
+            $('#StationId').html(html)
+        },
+        error: function () {
+            showErrorMessage();
+        }
+    })
+}
 function showSuccessMessage(message = 'Saved successfully') {
     Swal.fire({
         text: message,
